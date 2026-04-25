@@ -3,10 +3,10 @@
 
 jmp start
 
-%include "../../../../include/arch/x86/boot/print_utils/print_string.s"
-%include "../../../../include/arch/x86/boot/print_utils/print_hex.s"
-%include "../../../../include/arch/x86/boot/gdt.s"
-%include "../../../../include/arch/x86/boot/pm_switch.s"
+%include "../../../include/boot/x86/print_utils/print_string.s"
+%include "../../../include/boot/x86/print_utils/print_hex.s"
+%include "../../../include/boot/x86/gdt.s"
+%include "../../../include/boot/x86/pm_switch.s"
 
 [BITS 16]
 
