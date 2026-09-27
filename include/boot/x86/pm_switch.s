@@ -23,4 +23,4 @@ init_pm: ; we are now using 32-bit instructions
     mov ebp, 0x90000 ; 6. update the stack right at the top of the free space
     mov esp, ebp
 
-    call start_pm ; 7. Call a well-known label with useful code
+    jmp start_pm; 7. Call a well-known label with useful code

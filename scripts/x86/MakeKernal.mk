@@ -1,6 +1,7 @@
 COMMON_DIR := ../../source/kernal/source
 X86_DIR := ../../source/kernal/arch/x86
 BUILD_DIR := ../../build
+INCLUDE_DIR := ../../include
 
 KERNAL_ELF := $(BUILD_DIR)/kernal.elf
 
@@ -9,7 +10,7 @@ AS := nasm
 
 LINKER = linker.ld
 
-ASFLAGS = -f elf32
+ASFLAGS = -f elf32 -i
 CFLAGS := -m32 -ffreestanding -Wall -g
 LDFLAGS := -m32 -ffreestanding -nostdlib -T $(LINKER)
 LDFLAGS_SUFFIX_FLAGS := -Wl,-z,noexecstack
@@ -33,7 +34,7 @@ $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR)/%.o: %.s
-	$(AS) $(ASFLAGS) $< -o $@
+	$(AS) $(ASFLAGS) $(INCLUDE_DIR) $< -o $@
 
 $(KERNAL_ELF): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDFLAGS_SUFFIX_FLAGS)

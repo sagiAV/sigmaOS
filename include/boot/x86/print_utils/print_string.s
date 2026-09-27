@@ -28,7 +28,9 @@ VIDEO_MEMORY equ 0xb8000
 WHITE_ON_BLACK equ 0x0f ; the color byte for each character
 
 print_string_pm:
-    pusha
+    push edx
+    push eax
+    push ebx
     mov edx, VIDEO_MEMORY
 
 print_string_pm_loop:
@@ -45,5 +47,7 @@ print_string_pm_loop:
     jmp print_string_pm_loop
 
 print_string_pm_done:
-    popa
+    pop edx
+    pop eax
+    pop ebx
     ret
