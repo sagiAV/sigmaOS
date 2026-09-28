@@ -88,4 +88,5 @@ dkms.conf
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/c,assembler,executable,visualstudiocode
+build/*
+.gdb_history

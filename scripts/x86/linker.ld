@@ -1,26 +1,33 @@
 OUTPUT_FORMAT(elf32-i386)
 ENTRY(kernal_start)
 
+HIGHER_HALF_KERNAL = 0xC0000000;
+CURR_LOAD = 0x10000;
+
 SECTIONS
 {
-    . = 0xC0000000;
+    . = HIGHER_HALF_KERNAL;
+
     PROVIDE(kernal_virt_start_addr = .);
 
-    .head.text : {
+    .head.text : AT(ADDR(.head.text) - HIGHER_HALF_KERNAL + CURR_LOAD)
+    {
         *(.head.text)
     }
 
-    .text : {
+    .text : AT(ADDR(.text) - HIGHER_HALF_KERNAL + CURR_LOAD)
+    {
         *(.text)
     }
 
     . = ALIGN(4k);
-    .data : {
+    .data : AT(ADDR(.data) - HIGHER_HALF_KERNAL + CURR_LOAD)
+    {
         *(.data)
     }
 
     . = ALIGN(4k);
-    .bss :
+    .bss : AT(ADDR(.bss) - HIGHER_HALF_KERNAL + CURR_LOAD)
     {
             _BSS_START = ABSOLUTE(.);
             *(.bss)
@@ -29,7 +36,8 @@ SECTIONS
     _BSS_SIZE = ABSOLUTE(.) - _BSS_START;
 
     . = ALIGN(4k);
-    .rodata : {
+    .rodata : AT(ADDR(.rodata)- HIGHER_HALF_KERNAL + CURR_LOAD)
+    {
         *(.rodata)
     }
 
